@@ -8,7 +8,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 /**
- * Created by michal on 21.04.16.
+ * Class designed to parse response from MovieDB API
  */
 public class JsonParser {
 
@@ -23,6 +23,9 @@ public class JsonParser {
     public static final String TAG_ID = "id";
     public static final String TAG_ORIGINAL_TITLE = "original_title";
     public static final String TAG_VOTE_AVERAGE = "vote_average";
+
+    public static final String BASE_URL = "http://image.tmdb.org/t/p/";
+    public static final String BASIC_SIZE = "w185";
 
 
     public JsonParser (String inputJson) {
@@ -66,6 +69,18 @@ public class JsonParser {
     public ArrayList<HashMap<String, String>> getResultList () {
 
         return resultList;
+    }
+
+    public ArrayList<String> getPosterThumbnails(){
+
+        ArrayList<String> posterTumbnails = new ArrayList<>();
+
+        for (HashMap<String, String> element : resultList) {
+            posterTumbnails.add(BASE_URL + BASIC_SIZE + "/" + element.get(TAG_POSTER_PATH));
+        }
+
+        return posterTumbnails;
+
     }
 
 }

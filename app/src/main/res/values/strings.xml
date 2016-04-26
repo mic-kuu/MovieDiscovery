@@ -1,3 +1,7 @@
 <resources>
     <string name="app_name">MovieDiscovery</string>
+
+    <string name="all_error_nointernet">There was a problem with the internet access. Please try again later.</string>
+
+    <string name="activity_main_imagedescription">An image</string>
 </resources>
