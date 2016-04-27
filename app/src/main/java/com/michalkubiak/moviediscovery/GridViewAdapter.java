@@ -29,7 +29,6 @@ public class GridViewAdapter extends ArrayAdapter {
         this.data = data;
     }
 
-
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
         View row = convertView;
@@ -45,8 +44,6 @@ public class GridViewAdapter extends ArrayAdapter {
         } else {
             holder = (ViewHolder) row.getTag();
         }
-
-
 
         String imgURL = data.get(position);
         Picasso.with(getContext()).load(imgURL).fit().into(holder.image);

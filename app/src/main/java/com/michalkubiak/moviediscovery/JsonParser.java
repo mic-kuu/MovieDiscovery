@@ -1,5 +1,7 @@
 package com.michalkubiak.moviediscovery;
 
+import android.util.Log;
+
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -27,7 +29,6 @@ public class JsonParser {
     public static final String BASE_URL = "http://image.tmdb.org/t/p/";
     public static final String BASIC_SIZE = "w185";
 
-
     public JsonParser (String inputJson) {
 
         this.inputJson = inputJson;
@@ -40,7 +41,9 @@ public class JsonParser {
             jsonObject = new JSONObject(inputJson);
             results = jsonObject.getJSONArray(TAG_RESULTS);
 
-            for (int i = 0; i < jsonObject.length(); i++) {
+
+
+            for (int i = 0; i < results.length(); i++) {
                 JSONObject resultsJSONObject = results.getJSONObject(i);
 
                 String posterPath = resultsJSONObject.getString(TAG_POSTER_PATH);
@@ -66,7 +69,7 @@ public class JsonParser {
         }
     }
 
-    public ArrayList<HashMap<String, String>> getResultList () {
+    public ArrayList<HashMap<String, String>> getResultList() {
 
         return resultList;
     }
@@ -82,5 +85,7 @@ public class JsonParser {
         return posterTumbnails;
 
     }
+
+
 
 }

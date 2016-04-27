@@ -1,9 +1,7 @@
 package com.michalkubiak.moviediscovery.network;
 
 import android.os.AsyncTask;
-import android.support.graphics.drawable.BuildConfig;
 import android.util.Log;
-import android.view.View;
 
 import com.michalkubiak.moviediscovery.AsyncResponse;
 
@@ -15,13 +13,14 @@ import java.net.MalformedURLException;
 import java.net.URL;
 
 /**
- * Created by michal on 19.04.16.
+ * Simple implementation of AsyncTask that downloads JSON from MOVIEDB API,
+ * handles errors and triggers its further processing
  */
 public class RetriveAPITask extends AsyncTask<Void, Void, String> {
 
     public AsyncResponse delegate = null;
 
-    private String adress = "http://api.themoviedb.org/3/discover/movie?api_key=" + com.michalkubiak.moviediscovery.BuildConfig.THE_MOVIE_DB_API_KEY;
+    private String adress = "http://api.themoviedb.org/3/discover/movie?page=5&api_key=" + com.michalkubiak.moviediscovery.BuildConfig.THE_MOVIE_DB_API_KEY;
     private static final String TAG = RetriveAPITask.class.getSimpleName();
 
     @Override
@@ -37,6 +36,8 @@ public class RetriveAPITask extends AsyncTask<Void, Void, String> {
                     stringBuilder.append(line).append("\n");
                 }
                 bufferedReader.close();
+
+
                 return stringBuilder.toString();
             }
             finally{

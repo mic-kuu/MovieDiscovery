@@ -5,9 +5,9 @@ import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.widget.GridView;
 import android.widget.Toast;
-
 
 import com.michalkubiak.moviediscovery.network.RetriveAPITask;
 
@@ -35,12 +35,12 @@ public class MainActivity extends AppCompatActivity implements AsyncResponse {
         retriveAPITask.delegate = this;
         if (isOnline()){
             retriveAPITask.execute();
+
         } else {
 
             Toast.makeText(MainActivity.this, getString(R.string.all_error_nointernet), Toast.LENGTH_SHORT).show();
             //TODO: Additional error handling
         }
-
 
     }
 
@@ -50,7 +50,14 @@ public class MainActivity extends AppCompatActivity implements AsyncResponse {
         jsonParser.parse();
 
         posterThumbnails = jsonParser.getPosterThumbnails();
+        movieList = jsonParser.getResultList();
         updateImages();
+       /* for (HashMap<String, String> element : movieList ){
+            Log.d(TAG,"tytuł: " + element.get(JsonParser.TAG_ORIGINAL_TITLE));
+            Log.d(TAG,"id filmu: " + element.get(JsonParser.TAG_ID));
+            Log.d(TAG,"url filmu: " + element.get(JsonParser.TAG_POSTER_PATH));
+            Log.d(TAG,"średnia ocen: " + element.get(JsonParser.TAG_VOTE_AVERAGE));
+        }*/
     }
 
 
@@ -63,7 +70,6 @@ public class MainActivity extends AppCompatActivity implements AsyncResponse {
 
     }
 
-
     public boolean isOnline() {
         ConnectivityManager cm =
                 (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
@@ -72,6 +78,3 @@ public class MainActivity extends AppCompatActivity implements AsyncResponse {
     }
 
 }
-
-
-
