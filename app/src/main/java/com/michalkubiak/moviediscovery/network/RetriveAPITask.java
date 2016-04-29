@@ -20,13 +20,15 @@ public class RetriveAPITask extends AsyncTask<Void, Void, String> {
 
     public AsyncResponse delegate = null;
 
-    private String adress = "http://api.themoviedb.org/3/discover/movie?page=5&api_key=" + com.michalkubiak.moviediscovery.BuildConfig.THE_MOVIE_DB_API_KEY;
+    private static final int PAGES_NO = 5;
+
+    private static final String API_URL = APIcontract.getDiscoverMovieURL(PAGES_NO);
     private static final String TAG = RetriveAPITask.class.getSimpleName();
 
     @Override
     protected String doInBackground(Void... params) {
         try {
-            URL url = new URL(adress);
+            URL url = new URL(API_URL);
             HttpURLConnection urlConnection = (HttpURLConnection) url.openConnection();
             try {
                 BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(urlConnection.getInputStream()));

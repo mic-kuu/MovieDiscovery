@@ -47,6 +47,7 @@ public class GridViewAdapter extends ArrayAdapter {
 
         String imgURL = data.get(position);
         Picasso.with(getContext()).load(imgURL).fit().into(holder.image);
+
         return row;
     }
 

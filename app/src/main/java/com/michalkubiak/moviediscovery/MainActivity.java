@@ -5,21 +5,19 @@ import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
 import android.widget.GridView;
 import android.widget.Toast;
 
 import com.michalkubiak.moviediscovery.network.RetriveAPITask;
-
+import com.michalkubiak.moviediscovery.pojo.MovieItem;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 
 public class MainActivity extends AppCompatActivity implements AsyncResponse {
 
     private static final String TAG = MainActivity.class.getSimpleName();
 
-    private ArrayList<HashMap<String, String>> movieList;
+    private ArrayList<MovieItem> movieList;
     private ArrayList<String> posterThumbnails;
     private GridViewAdapter gridViewAdapter;
     private GridView gridView;
@@ -52,12 +50,6 @@ public class MainActivity extends AppCompatActivity implements AsyncResponse {
         posterThumbnails = jsonParser.getPosterThumbnails();
         movieList = jsonParser.getResultList();
         updateImages();
-       /* for (HashMap<String, String> element : movieList ){
-            Log.d(TAG,"tytuł: " + element.get(JsonParser.TAG_ORIGINAL_TITLE));
-            Log.d(TAG,"id filmu: " + element.get(JsonParser.TAG_ID));
-            Log.d(TAG,"url filmu: " + element.get(JsonParser.TAG_POSTER_PATH));
-            Log.d(TAG,"średnia ocen: " + element.get(JsonParser.TAG_VOTE_AVERAGE));
-        }*/
     }
 
 
