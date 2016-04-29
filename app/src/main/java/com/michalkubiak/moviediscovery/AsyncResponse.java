@@ -1,7 +1,7 @@
 package com.michalkubiak.moviediscovery;
 
 /**
- * Created by michal on 21.04.16.
+ * Interface to make a callback after the async task finishes
  */
 public interface AsyncResponse {
 
