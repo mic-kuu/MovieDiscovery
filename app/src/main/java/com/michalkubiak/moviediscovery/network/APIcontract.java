@@ -3,18 +3,17 @@ package com.michalkubiak.moviediscovery.network;
 import com.michalkubiak.moviediscovery.BuildConfig;
 
 /**
- * API contract returns URL to API's endpoints
+ * API contract returns URL to specific API's endpoints
  */
 public class APIcontract {
     private static final String API_KEY = BuildConfig.THE_MOVIE_DB_API_KEY;
 
-    private static final String BASE_ADRES = "http://api.themoviedb.org/3/";
+    private static final String BASE_ADDRESS = "http://api.themoviedb.org/3/";
     private static final String BASE_IMAGES = "http://image.tmdb.org/t/p/";
-
 
     public static String getDiscoverMovieURL(int pages) {
 
-        String discoverMovieURL = BASE_ADRES + "discover/movie?page=" + pages + "&";
+        String discoverMovieURL = BASE_ADDRESS + "discover/movie?page=" + pages + "&";
 
         return addAPIKey(discoverMovieURL);
 

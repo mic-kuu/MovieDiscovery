@@ -8,7 +8,9 @@ import android.support.v7.app.AppCompatActivity;
 import android.widget.GridView;
 import android.widget.Toast;
 
-import com.michalkubiak.moviediscovery.network.RetriveAPITask;
+import com.michalkubiak.moviediscovery.network.AsyncResponse;
+import com.michalkubiak.moviediscovery.network.JsonParser;
+import com.michalkubiak.moviediscovery.network.RetrieveAPITask;
 import com.michalkubiak.moviediscovery.pojo.MovieItem;
 
 import java.util.ArrayList;
@@ -18,11 +20,10 @@ public class MainActivity extends AppCompatActivity implements AsyncResponse {
     private static final String TAG = MainActivity.class.getSimpleName();
 
     private ArrayList<MovieItem> movieList;
-    private ArrayList<String> posterThumbnails;
     private GridViewAdapter gridViewAdapter;
     private GridView gridView;
 
-    RetriveAPITask retriveAPITask = new RetriveAPITask();
+    private RetrieveAPITask retrieveAPITask = new RetrieveAPITask();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -30,9 +31,9 @@ public class MainActivity extends AppCompatActivity implements AsyncResponse {
         setContentView(R.layout.activity_main);
         gridView = (GridView) findViewById(R.id.gridView);
 
-        retriveAPITask.delegate = this;
+        retrieveAPITask.delegate = this;
         if (isOnline()){
-            retriveAPITask.execute();
+            retrieveAPITask.execute();
 
         } else {
 
@@ -46,8 +47,6 @@ public class MainActivity extends AppCompatActivity implements AsyncResponse {
     public void processOutput(String output) {
         JsonParser jsonParser = new JsonParser(output);
         jsonParser.parse();
-
-        posterThumbnails = jsonParser.getPosterThumbnails();
         movieList = jsonParser.getResultList();
         updateImages();
     }
@@ -56,12 +55,12 @@ public class MainActivity extends AppCompatActivity implements AsyncResponse {
     private void updateImages() {
 
         if (gridViewAdapter == null) {
-            gridViewAdapter = new GridViewAdapter(this, R.layout.grid_item_layout, posterThumbnails);
+            gridViewAdapter = new GridViewAdapter(this, R.layout.grid_item_layout, movieList);
             gridView.setAdapter(gridViewAdapter);
         }
 
     }
-
+    //TODO: move isOnline to a better place
     public boolean isOnline() {
         ConnectivityManager cm =
                 (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);

@@ -1,4 +1,4 @@
-package com.michalkubiak.moviediscovery;
+package com.michalkubiak.moviediscovery.network;
 
 import android.util.Log;
 
@@ -14,7 +14,6 @@ import java.util.ArrayList;
  * Class designed to parse response from MovieDB API
  */
 public class JsonParser {
-
 
     private JSONObject jsonObject;
     private JSONArray results;
@@ -36,35 +35,38 @@ public class JsonParser {
     }
 
     public boolean parse() {
-        try {
-            jsonObject = new JSONObject(inputJson);
-            results = jsonObject.getJSONArray(TAG_RESULTS);
+        if (results != null) {
+            try {
+                jsonObject = new JSONObject(inputJson);
+                results = jsonObject.getJSONArray(TAG_RESULTS);
 
-            for (int i = 0; i < results.length(); i++) {
-                JSONObject resultsJSONObject = results.getJSONObject(i);
+                for (int i = 0; i < results.length(); i++) {
+                    JSONObject resultsJSONObject = results.getJSONObject(i);
 
-                String posterPath = resultsJSONObject.getString(TAG_POSTER_PATH);
-                String id = resultsJSONObject.getString(TAG_ID);
-                String originalTitle = resultsJSONObject.getString(TAG_ORIGINAL_TITLE);
-                String voteAverage = resultsJSONObject.getString(TAG_VOTE_AVERAGE);
+                    String posterPath = resultsJSONObject.getString(TAG_POSTER_PATH);
+                    String id = resultsJSONObject.getString(TAG_ID);
+                    String originalTitle = resultsJSONObject.getString(TAG_ORIGINAL_TITLE);
+                    String voteAverage = resultsJSONObject.getString(TAG_VOTE_AVERAGE);
 
-                MovieItem movie = new MovieItem();
+                    MovieItem movie = new MovieItem();
 
-                movie.setId(id);
-                movie.setPosterPath(posterPath);
-                movie.setOrginalTitle(originalTitle);
-                movie.setVoteAverage(voteAverage);
+                    movie.setId(id);
+                    movie.setPosterPath(posterPath);
+                    movie.setOrginalTitle(originalTitle);
+                    movie.setVoteAverage(voteAverage);
 
-                resultList.add(movie);
+                    resultList.add(movie);
 
+                }
+
+                return true;
+
+            } catch (JSONException e) {
+                e.printStackTrace();
+                return false;
             }
-
-            return true;
-
-        } catch (JSONException e) {
-            e.printStackTrace();
-            return false;
         }
+        return false;
     }
 
     public ArrayList<MovieItem> getResultList() {
@@ -83,7 +85,4 @@ public class JsonParser {
         return posterThumbnails;
 
     }
-
-
-
 }

@@ -8,21 +8,23 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import com.michalkubiak.moviediscovery.pojo.MovieItem;
 import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 
 /**
  * The adapter responsible for populating the GridView with images
- * recieved from MovieDB API
+ * received from MovieDB API
  */
 public class GridViewAdapter extends ArrayAdapter {
     private Context context;
     private int layoutResourceId;
-    private ArrayList<String> data = new ArrayList<>();
+    private ArrayList<MovieItem> data = new ArrayList<>();
 
-    public GridViewAdapter(Context context, int layoutResourceId, ArrayList<String> data) {
+    public GridViewAdapter(Context context, int layoutResourceId, ArrayList<MovieItem> data) {
         super(context, layoutResourceId, data);
         this.layoutResourceId = layoutResourceId;
         this.context = context;
@@ -30,7 +32,7 @@ public class GridViewAdapter extends ArrayAdapter {
     }
 
     @Override
-    public View getView(int position, View convertView, ViewGroup parent) {
+    public View getView(final int position, View convertView, ViewGroup parent) {
         View row = convertView;
         ViewHolder holder;
 
@@ -45,8 +47,14 @@ public class GridViewAdapter extends ArrayAdapter {
             holder = (ViewHolder) row.getTag();
         }
 
-        String imgURL = data.get(position);
+        String imgURL = data.get(position).getPosterPath();
         Picasso.with(getContext()).load(imgURL).fit().into(holder.image);
+        row.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Toast.makeText(getContext(), data.get(position).getId(), Toast.LENGTH_SHORT).show();
+            }
+        });
 
         return row;
     }
