@@ -1,7 +1,5 @@
 package com.michalkubiak.moviediscovery.network;
 
-import android.util.Log;
-
 import com.michalkubiak.moviediscovery.pojo.MovieItem;
 
 import org.json.JSONArray;
@@ -15,7 +13,6 @@ import java.util.ArrayList;
  */
 public class JsonParser {
 
-    private JSONObject jsonObject;
     private JSONArray results;
     private String inputJson;
 
@@ -37,7 +34,7 @@ public class JsonParser {
     public boolean parse() {
         if (results != null) {
             try {
-                jsonObject = new JSONObject(inputJson);
+                JSONObject jsonObject = new JSONObject(inputJson);
                 results = jsonObject.getJSONArray(TAG_RESULTS);
 
                 for (int i = 0; i < results.length(); i++) {
@@ -52,7 +49,7 @@ public class JsonParser {
 
                     movie.setId(id);
                     movie.setPosterPath(posterPath);
-                    movie.setOrginalTitle(originalTitle);
+                    movie.setOriginalTitle(originalTitle);
                     movie.setVoteAverage(voteAverage);
 
                     resultList.add(movie);

@@ -4,4 +4,7 @@
     <string name="all_error_nointernet">There was a problem with the internet access. Please try again later.</string>
 
     <string name="activity_main_imagedescription">An image</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>

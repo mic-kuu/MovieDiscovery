@@ -14,19 +14,18 @@ import java.net.URL;
  * Simple implementation of AsyncTask that downloads JSON from MOVIEDB API,
  * handles errors and triggers its further processing
  */
-public class RetrieveAPITask extends AsyncTask<Void, Void, String> {
+public class RetrieveMovieDBAPI extends AsyncTask<Void, Void, String> {
 
     public AsyncResponse delegate = null;
 
-    private static final int PAGES_NO = 5;
 
-    private static final String API_URL = APIcontract.getDiscoverMovieURL(PAGES_NO);
-    private static final String TAG = RetrieveAPITask.class.getSimpleName();
+    private String apiEndpoint = "testurl";
+    private static final String TAG = RetrieveMovieDBAPI.class.getSimpleName();
 
     @Override
     protected String doInBackground(Void... params) {
         try {
-            URL url = new URL(API_URL);
+            URL url = new URL(apiEndpoint);
             HttpURLConnection urlConnection = (HttpURLConnection) url.openConnection();
             try {
                 BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(urlConnection.getInputStream()));
@@ -60,4 +59,10 @@ public class RetrieveAPITask extends AsyncTask<Void, Void, String> {
         }
 
     }
+
+    public void setAPIEndpoint (String apiEndpoint){
+        this.apiEndpoint = apiEndpoint;
+    }
+
+
 }

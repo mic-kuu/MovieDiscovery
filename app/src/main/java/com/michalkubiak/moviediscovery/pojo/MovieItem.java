@@ -1,15 +1,18 @@
 package com.michalkubiak.moviediscovery.pojo;
 
+import android.os.Parcel;
+import android.os.Parcelable;
+
 import com.michalkubiak.moviediscovery.network.APIcontract;
 
 /**
  * A simple pojo class representing a movie
  */
-public class MovieItem {
-
+public class MovieItem implements APIElement, Parcelable{
+    //TODO: finish parcelable implementation
     private String id;
     private String posterPath;
-    private String orginalTitle;
+    private String originalTitle;
     private String voteAverage;
 
     public String getId() {
@@ -28,12 +31,12 @@ public class MovieItem {
         this.posterPath = APIcontract.getPosterImageURL(posterPath);
     }
 
-    public String getOrginalTitle() {
-        return orginalTitle;
+    public String getOriginalTitle() {
+        return originalTitle;
     }
 
-    public void setOrginalTitle(String orginalTitle) {
-        this.orginalTitle = orginalTitle;
+    public void setOriginalTitle(String originalTitle) {
+        this.originalTitle = originalTitle;
     }
 
     public String getVoteAverage() {
@@ -43,4 +46,39 @@ public class MovieItem {
     public void setVoteAverage(String voteAverage) {
         this.voteAverage = voteAverage;
     }
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeString(id);
+        dest.writeString(posterPath);
+        dest.writeString(originalTitle);
+        dest.writeString(voteAverage);
+    }
+    public MovieItem(){
+
+    }
+
+    private MovieItem (Parcel in){
+        this.id = in.readString();
+        this.posterPath = in.readString();
+        this.originalTitle = in.readString();
+        this.voteAverage = in.readString();
+    }
+
+    public static final Parcelable.Creator<MovieItem> CREATOR = new Parcelable.Creator<MovieItem>() {
+        @Override
+        public MovieItem createFromParcel(Parcel source) {
+            return new  MovieItem(source);
+        }
+
+        @Override
+        public MovieItem[] newArray(int size) {
+            return new MovieItem[size];
+        }
+    };
 }

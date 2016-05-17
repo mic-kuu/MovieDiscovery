@@ -3,18 +3,11 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.michalkubiak.moviediscovery.MainActivity">
+    tools:context="com.michalkubiak.moviediscovery.MainActivity"
+    android:id="@+id/gridViewPlaceholder">
 
-    <GridView
-        android:id="@+id/gridView"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:drawSelectorOnTop="true"
-        android:gravity="center"
-        android:numColumns="auto_fit"
-        android:stretchMode="columnWidth"
-        android:verticalSpacing="1dp"
-        android:focusable="true"
-        android:clickable="true"/>
+
+
+
 
 </RelativeLayout>
