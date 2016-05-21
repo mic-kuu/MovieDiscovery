@@ -63,6 +63,7 @@ public class MainActivity extends AppCompatActivity implements AsyncResponse, Mo
         if (jsonParser.parse()){
             movieList = jsonParser.getResultList();
             addMovieListFragment();
+
         } else {
 
             Toast.makeText(this, "There was a problem parsing json", Toast.LENGTH_SHORT).show();

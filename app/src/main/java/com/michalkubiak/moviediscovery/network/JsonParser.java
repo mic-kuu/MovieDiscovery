@@ -1,5 +1,7 @@
 package com.michalkubiak.moviediscovery.network;
 
+import android.util.Log;
+
 import com.michalkubiak.moviediscovery.pojo.MovieItem;
 
 import org.json.JSONArray;
@@ -32,7 +34,7 @@ public class JsonParser {
     }
 
     public boolean parse() {
-        if (results != null) {
+        if (inputJson != null) {
             try {
                 JSONObject jsonObject = new JSONObject(inputJson);
                 results = jsonObject.getJSONArray(TAG_RESULTS);
