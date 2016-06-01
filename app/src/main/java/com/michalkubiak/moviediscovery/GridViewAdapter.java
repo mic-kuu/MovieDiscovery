@@ -2,6 +2,7 @@ package com.michalkubiak.moviediscovery;
 
 import android.app.Activity;
 import android.content.Context;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -10,6 +11,9 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.michalkubiak.moviediscovery.network.APIcontract;
+import com.michalkubiak.moviediscovery.network.AsyncResponse;
+import com.michalkubiak.moviediscovery.network.RetrieveMovieDBAPI;
 import com.michalkubiak.moviediscovery.pojo.MovieItem;
 import com.squareup.picasso.Picasso;
 
@@ -23,12 +27,14 @@ public class GridViewAdapter extends ArrayAdapter {
     private Context context;
     private int layoutResourceId;
     private ArrayList<MovieItem> data = new ArrayList<>();
+    AsyncResponse delegate;
 
-    public GridViewAdapter(Context context, int layoutResourceId, ArrayList<MovieItem> data) {
+    public GridViewAdapter(Context context, int layoutResourceId, ArrayList<MovieItem> data, AsyncResponse delegate) {
         super(context, layoutResourceId, data);
         this.layoutResourceId = layoutResourceId;
         this.context = context;
         this.data = data;
+        this.delegate = delegate;
     }
 
     @Override
@@ -52,7 +58,13 @@ public class GridViewAdapter extends ArrayAdapter {
         row.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(getContext(), data.get(position).getId(), Toast.LENGTH_SHORT).show();
+                RetrieveMovieDBAPI retrieveMovieDBAPI = new RetrieveMovieDBAPI();
+
+                int movieID = data.get(position).getId();
+                retrieveMovieDBAPI.setAPIEndpoint(APIcontract.getMoivieDetails(movieID));
+                retrieveMovieDBAPI.setResponseType(RetrieveMovieDBAPI.MOVIEDETAIL);
+                retrieveMovieDBAPI.delegate = delegate;
+                retrieveMovieDBAPI.execute();
             }
         });
 

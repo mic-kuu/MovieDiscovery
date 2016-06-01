@@ -13,8 +13,10 @@ import android.widget.Toast;
 
 import com.michalkubiak.moviediscovery.network.APIcontract;
 import com.michalkubiak.moviediscovery.network.AsyncResponse;
-import com.michalkubiak.moviediscovery.network.JsonParser;
+import com.michalkubiak.moviediscovery.network.MovieDetailsParser;
+import com.michalkubiak.moviediscovery.network.MovieListParser;
 import com.michalkubiak.moviediscovery.network.RetrieveMovieDBAPI;
+import com.michalkubiak.moviediscovery.pojo.MovieDetails;
 import com.michalkubiak.moviediscovery.pojo.MovieItem;
 
 import java.util.ArrayList;
@@ -36,7 +38,7 @@ public class MainActivity extends AppCompatActivity implements AsyncResponse, Mo
     private void retrieveMovieDBAPI(){
         retrieveMovieDBAPI.delegate = this;
         retrieveMovieDBAPI.setAPIEndpoint(APIcontract.getDiscoverMoviesURL(5));
-        Log.v(TAG, APIcontract.getDiscoverMoviesURL(5));
+        retrieveMovieDBAPI.setResponseType(retrieveMovieDBAPI.MOVIEGRID);
         if (isOnline()){
             retrieveMovieDBAPI.execute();
         } else {
@@ -58,17 +60,31 @@ public class MainActivity extends AppCompatActivity implements AsyncResponse, Mo
 
     @Override
     public void processOutput(String output) {
-        JsonParser jsonParser = new JsonParser(output);
+        MovieListParser movieListParser = new MovieListParser(output);
 
-        if (jsonParser.parse()){
-            movieList = jsonParser.getResultList();
+        if (movieListParser.parse()){
+            movieList = movieListParser.getResultList();
             addMovieListFragment();
 
         } else {
 
             Toast.makeText(this, "There was a problem parsing json", Toast.LENGTH_SHORT).show();
-
         }
+    }
+
+    @Override
+    public void processDetailed(String output) {
+        MovieDetailsParser movieDetailsParser = new MovieDetailsParser(output);
+
+        if (movieDetailsParser.parse()){
+            MovieDetails movieDetails = movieDetailsParser.getMovieDetails();
+            Toast.makeText(MainActivity.this, "DONE!!!", Toast.LENGTH_SHORT).show();
+
+        } else {
+            Toast.makeText(MainActivity.this, "There was a problem parsing json", Toast.LENGTH_SHORT).show();
+        }
+
+
     }
 
     //TODO: move isOnline to a better place

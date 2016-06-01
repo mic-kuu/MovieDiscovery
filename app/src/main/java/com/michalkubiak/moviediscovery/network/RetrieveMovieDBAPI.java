@@ -22,6 +22,13 @@ public class RetrieveMovieDBAPI extends AsyncTask<Void, Void, String> {
     private String apiEndpoint = "testurl";
     private static final String TAG = RetrieveMovieDBAPI.class.getSimpleName();
 
+    //Impementing it in ugly way
+    //TODO: Find a better solution and refactor
+    public static final int MOVIEGRID = 0;
+    public static final int MOVIEDETAIL = 1;
+
+    private int returnType = 0;
+
     @Override
     protected String doInBackground(Void... params) {
         try {
@@ -53,7 +60,15 @@ public class RetrieveMovieDBAPI extends AsyncTask<Void, Void, String> {
     @Override
     protected void onPostExecute(String response) {
         if (delegate != null){
-            delegate.processOutput(response);
+            switch (returnType) {
+                case MOVIEGRID:
+                    delegate.processOutput(response);
+                    break;
+                case MOVIEDETAIL:
+                    delegate.processDetailed(response);
+                    break;
+            }
+
         } else {
             Log.d(TAG, "There was an error in passing the data. Delegate is null");
         }
@@ -63,6 +78,12 @@ public class RetrieveMovieDBAPI extends AsyncTask<Void, Void, String> {
     public void setAPIEndpoint (String apiEndpoint){
         this.apiEndpoint = apiEndpoint;
     }
+
+    public void setResponseType (int responseType){
+        returnType = responseType;
+    }
+
+
 
 
 }

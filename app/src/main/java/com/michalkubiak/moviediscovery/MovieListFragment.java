@@ -8,6 +8,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.GridView;
 
+import com.michalkubiak.moviediscovery.network.AsyncResponse;
 import com.michalkubiak.moviediscovery.pojo.MovieItem;
 
 import java.util.ArrayList;
@@ -67,7 +68,7 @@ public class MovieListFragment extends Fragment  {
         gridView = (GridView) view.findViewById(R.id.gridView);
 
         if (gridViewAdapter == null) {
-            gridViewAdapter = new GridViewAdapter(getContext(), R.layout.grid_item_layout, movieList);
+            gridViewAdapter = new GridViewAdapter(getContext(), R.layout.grid_item_layout, movieList,(AsyncResponse) getActivity());
             gridView.setAdapter(gridViewAdapter);
         }
 
@@ -97,8 +98,6 @@ public class MovieListFragment extends Fragment  {
         super.onDetach();
         mListener = null;
     }
-
-
 
     public interface MovieListInterface {
 

@@ -13,6 +13,7 @@ public class APIcontract {
     private static final String BASE_ADDRESS = "http://api.themoviedb.org/3/";
     private static final String BASE_IMAGES = "http://image.tmdb.org/t/p/";
 
+
     public static String getDiscoverMoviesURL(int pages) {
 
         String discoverMovieURL = BASE_ADDRESS + "discover/movie?page=" + pages + "&";
@@ -30,6 +31,11 @@ public class APIcontract {
 
         return BASE_IMAGES + "w185/" + imageEndpoint;
 
+    }
+
+    public static String getMoivieDetails (int movieID){
+        String noKey = BASE_ADDRESS + "movie/" + movieID + "?";
+        return addAPIKey(noKey);
     }
 
     private static String addAPIKey (String noKeyURL) {

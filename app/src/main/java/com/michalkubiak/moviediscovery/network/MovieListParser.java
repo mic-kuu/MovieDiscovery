@@ -13,7 +13,7 @@ import java.util.ArrayList;
 /**
  * Class designed to parse response from MovieDB API
  */
-public class JsonParser {
+public class MovieListParser {
 
     private JSONArray results;
     private String inputJson;
@@ -26,7 +26,7 @@ public class JsonParser {
     public static final String TAG_ORIGINAL_TITLE = "original_title";
     public static final String TAG_VOTE_AVERAGE = "vote_average";
 
-    public JsonParser (String inputJson) {
+    public MovieListParser(String inputJson) {
 
         this.inputJson = inputJson;
         resultList = new ArrayList<>();
@@ -49,7 +49,9 @@ public class JsonParser {
 
                     MovieItem movie = new MovieItem();
 
-                    movie.setId(id);
+
+                    Log.v("SPRAWDZ", "idval: " + id);
+                    movie.setId(Integer.parseInt(id));
                     movie.setPosterPath(posterPath);
                     movie.setOriginalTitle(originalTitle);
                     movie.setVoteAverage(voteAverage);

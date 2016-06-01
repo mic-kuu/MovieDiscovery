@@ -10,16 +10,16 @@ import com.michalkubiak.moviediscovery.network.APIcontract;
  */
 public class MovieItem implements APIElement, Parcelable{
     //TODO: finish parcelable implementation
-    private String id;
+    private int id;
     private String posterPath;
     private String originalTitle;
     private String voteAverage;
 
-    public String getId() {
+    public int getId() {
         return id;
     }
 
-    public void setId(String id) {
+    public void setId(int id) {
         this.id = id;
     }
 
@@ -54,7 +54,7 @@ public class MovieItem implements APIElement, Parcelable{
 
     @Override
     public void writeToParcel(Parcel dest, int flags) {
-        dest.writeString(id);
+        dest.writeInt(id);
         dest.writeString(posterPath);
         dest.writeString(originalTitle);
         dest.writeString(voteAverage);
@@ -64,7 +64,7 @@ public class MovieItem implements APIElement, Parcelable{
     }
 
     private MovieItem (Parcel in){
-        this.id = in.readString();
+        this.id = in.readInt();
         this.posterPath = in.readString();
         this.originalTitle = in.readString();
         this.voteAverage = in.readString();

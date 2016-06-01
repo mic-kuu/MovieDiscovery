@@ -6,4 +6,5 @@ package com.michalkubiak.moviediscovery.network;
 public interface AsyncResponse {
 
     void processOutput(String output);
+    void processDetailed(String output);
 }
