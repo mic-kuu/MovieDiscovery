@@ -1,13 +1,145 @@
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.michalkubiak.moviediscovery.MovieDetailFragment">
+    tools:context="com.michalkubiak.moviediscovery.MovieDetailFragment"
+    android:background="#ffffff"
+    android:clickable="true">
 
     <!-- TODO: Update blank fragment layout -->
     <TextView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="@string/hello_blank_fragment" />
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Movie Title"
+        android:id="@+id/movieTile"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="22dp"
+        android:textStyle="bold"
+        android:textSize="20sp"
+        android:layout_alignParentTop="true"
+        android:layout_toRightOf="@+id/poster_id"
+        android:layout_toEndOf="@+id/poster_id"
+        android:layout_marginLeft="19dp"
+        android:layout_marginStart="19dp" />
 
-</FrameLayout>
+    <ImageView
+        android:layout_width="150dp"
+        android:layout_height="200dp"
+        android:id="@+id/poster_id"
+        android:background="#000000"
+        android:layout_alignTop="@+id/movieTile"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_marginLeft="22dp"
+        android:layout_marginStart="22dp" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceSmall"
+        android:text="budget:"
+        android:id="@+id/budgetD_tv"
+        android:layout_below="@+id/movieTile"
+        android:layout_alignLeft="@+id/movieTile"
+        android:layout_alignStart="@+id/movieTile"
+        android:layout_marginTop="20dp" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceSmall"
+        android:text="adult content:"
+        android:id="@+id/adultcontetD_tv"
+        android:layout_below="@+id/budgetD_tv"
+        android:layout_alignLeft="@+id/budgetD_tv"
+        android:layout_alignStart="@+id/budgetD_tv" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceSmall"
+        android:text="vote count:"
+        android:id="@+id/votecountD_tv"
+        android:layout_below="@+id/adultcontetD_tv"
+        android:layout_alignLeft="@+id/adultcontetD_tv"
+        android:layout_alignStart="@+id/adultcontetD_tv" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceSmall"
+        android:text="vote average:"
+        android:id="@+id/voteaverageD_tv"
+        android:layout_below="@+id/votecountD_tv"
+        android:layout_alignLeft="@+id/votecountD_tv"
+        android:layout_alignStart="@+id/votecountD_tv" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceSmall"
+        android:text="genre:"
+        android:id="@+id/genreD_tv"
+        android:layout_below="@+id/voteaverageD_tv"
+        android:layout_alignLeft="@+id/voteaverageD_tv"
+        android:layout_alignStart="@+id/voteaverageD_tv" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text="Overview:"
+        android:id="@+id/textView6"
+        android:layout_centerVertical="true"
+        android:layout_alignLeft="@+id/poster_id"
+        android:layout_alignStart="@+id/poster_id" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceSmall"
+        android:text="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris neque velit, blandit et varius non, commodo sagittis magna. Etiam non dui in nunc imperdiet rhoncus. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Pellentesque dignissim lobortis blandit. Mauris eget lacinia erat. Nulla pretium sem nec commodo commodo. Phasellus ultrices maximus nunc eget mattis. Donec aliquam, diam auctor pulvinar convallis, leo erat ornare tellus, vehicula porta justo magna nec quam. Suspendisse convallis ante nibh, id ornare odio lacinia at. Praesent at fermentum odio. Maecenas ornare facilisis massa, eu molestie neque ultricies posuere."
+        android:id="@+id/overview_tv"
+        android:layout_below="@+id/textView6"
+        android:layout_alignLeft="@+id/textView6"
+        android:layout_alignStart="@+id/textView6" />
+
+    <TextView
+        android:text="TextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/adultcontent_tv"
+        android:layout_below="@+id/budget_tv"
+        android:layout_alignLeft="@+id/budget_tv"
+        android:layout_alignStart="@+id/budget_tv" />
+
+    <TextView
+        android:text="TextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/votecount_tv"
+        android:layout_below="@+id/adultcontent_tv"
+        android:layout_alignLeft="@+id/adultcontent_tv"
+        android:layout_alignStart="@+id/adultcontent_tv" />
+
+    <TextView
+        android:text="TextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/voteaverage_tv"
+        android:layout_below="@+id/votecount_tv"
+        android:layout_alignLeft="@+id/votecount_tv"
+        android:layout_alignStart="@+id/votecount_tv" />
+
+    <TextView
+        android:text="TextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/budget_tv"
+        android:layout_above="@+id/adultcontetD_tv"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginRight="16dp"
+        android:layout_marginEnd="16dp" />
+
+</RelativeLayout>

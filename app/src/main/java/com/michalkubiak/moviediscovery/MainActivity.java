@@ -4,6 +4,7 @@ package com.michalkubiak.moviediscovery;
 import android.content.Context;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
@@ -21,7 +22,7 @@ import com.michalkubiak.moviediscovery.pojo.MovieItem;
 
 import java.util.ArrayList;
 
-public class MainActivity extends AppCompatActivity implements AsyncResponse, MovieListFragment.MovieListInterface {
+public class MainActivity extends AppCompatActivity implements AsyncResponse, MovieListFragment.MovieListInterface, MovieDetailFragment.OnMovieDetailedInteractionListener {
 
     private static final String TAG = MainActivity.class.getSimpleName();
     private ArrayList<MovieItem> movieList;
@@ -47,13 +48,24 @@ public class MainActivity extends AppCompatActivity implements AsyncResponse, Mo
         }
     }
 
+    private void addMovieDetailFragment(MovieDetails movieDetails){
+        Fragment movieDetailFragment = MovieDetailFragment.newInstance(movieDetails);
+
+        FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
+
+        transaction.add(R.id.gridViewPlaceholder, movieDetailFragment);
+        transaction.addToBackStack(null);
+
+        transaction.commit();
+
+    }
+
 
     private void addMovieListFragment(){
         Fragment movieListFragment = MovieListFragment.newInstance(movieList);
         FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
 
-        transaction.replace(R.id.gridViewPlaceholder, movieListFragment);
-        transaction.addToBackStack(null);
+        transaction.add(R.id.gridViewPlaceholder, movieListFragment);
 
         transaction.commit();
     }
@@ -76,9 +88,11 @@ public class MainActivity extends AppCompatActivity implements AsyncResponse, Mo
     public void processDetailed(String output) {
         MovieDetailsParser movieDetailsParser = new MovieDetailsParser(output);
 
+
+
         if (movieDetailsParser.parse()){
             MovieDetails movieDetails = movieDetailsParser.getMovieDetails();
-            Toast.makeText(MainActivity.this, "DONE!!!", Toast.LENGTH_SHORT).show();
+            addMovieDetailFragment(movieDetails);
 
         } else {
             Toast.makeText(MainActivity.this, "There was a problem parsing json", Toast.LENGTH_SHORT).show();
@@ -97,6 +111,11 @@ public class MainActivity extends AppCompatActivity implements AsyncResponse, Mo
 
     @Override
     public void onDetailedViewSelected(int movieId) {
+
+    }
+
+    @Override
+    public void onFragmentInteraction(Uri uri) {
 
     }
 }

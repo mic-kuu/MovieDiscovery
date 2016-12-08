@@ -21,6 +21,17 @@ public class MovieDetails implements APIElement, Parcelable{
     private String voteAverage;
     private String voteCount;
 
+    public String getPosterPath() {
+        return posterPath;
+    }
+
+    public void setPosterPath(String posterPath) {
+        this.posterPath = posterPath;
+    }
+
+    private String posterPath;
+
+
     public MovieDetails (Parcel in){
 
     }

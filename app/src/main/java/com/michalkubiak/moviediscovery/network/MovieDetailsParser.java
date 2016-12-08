@@ -31,6 +31,7 @@ public class MovieDetailsParser {
     public static final String TAG_VIDEO = "video";
     public static final String TAG_VOTE_AVERAGE = "vote_average";
     public static final String TAG_VOTE_COUNT = "vote_count";
+    public static final String TAG_POSTER_PATH = "poster_path";
 
     public MovieDetailsParser(String inputJson) {
 
@@ -71,6 +72,7 @@ public class MovieDetailsParser {
                     String video = movieDetailsObject.getString(TAG_VIDEO);
                     String voteAverage = movieDetailsObject.getString(TAG_VOTE_AVERAGE);
                     String voteCount = movieDetailsObject.getString(TAG_VOTE_COUNT);
+                    String posterPath = movieDetailsObject.getString(TAG_POSTER_PATH);
 
 
 
@@ -84,6 +86,7 @@ public class MovieDetailsParser {
                     details.setVideo(Boolean.getBoolean(video));
                     details.setVoteAverage(voteAverage);
                     details.setVoteCount(voteCount);
+                    details.setPosterPath(posterPath);
                 }
                 Log.v("PARSEREK", "pozytywny efekt");
                 return true;
